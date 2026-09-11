@@ -5,24 +5,23 @@ from storage.database import Database
 
 PRODUCT_INFO_TOOL_SCHEMA = {
     "type": "function",
-    "function": {
-        "name": "get_product_info",
-        "description": (
-            "Retrieve basic product catalog information from the enterprise "
-            "product database."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "product_name": {
-                    "type": "string",
-                    "description": "Product name such as X100, X200, or X300.",
-                }
-            },
-            "required": ["product_name"],
-            "additionalProperties": False,
+    "name": "get_product_info",
+    "description": (
+        "Retrieve basic product catalog information from the enterprise "
+        "product database."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "product_name": {
+                "type": "string",
+                "description": "Product name such as X100, X200, or X300.",
+            }
         },
+        "required": ["product_name"],
+        "additionalProperties": False,
     },
+    "strict": True,
 }
 
 
@@ -37,6 +36,9 @@ def get_product_info(
             "found": False,
             "product_name": product_name,
         }
+
+    product = dict(product)
+    product["unit_price"] = str(product["unit_price"])
 
     return {
         "found": True,
