@@ -1,0 +1,86 @@
+[
+  {
+    "document_id": "product-manual-x200-2026",
+    "source_path": "product_manual/x200_manual_2026.md",
+    "document_name": "X200 工业控制器产品手册",
+    "document_type": "product_manual",
+    "department": "product",
+    "version": "2026",
+    "effective_date": "2026-01-01",
+    "product": "X200",
+    "region": "all",
+    "allowed_roles": ["sales", "support", "management", "admin"]
+  },
+  {
+    "document_id": "warranty-policy-2025",
+    "source_path": "after_sales/warranty_policy_2025.md",
+    "document_name": "产品售后保修政策（2025版）",
+    "document_type": "after_sales",
+    "department": "support",
+    "version": "2025",
+    "effective_date": "2025-01-01",
+    "product": "all",
+    "region": "all",
+    "allowed_roles": ["sales", "support", "management", "admin"]
+  },
+  {
+    "document_id": "warranty-policy-2026",
+    "source_path": "after_sales/warranty_policy_2026.md",
+    "document_name": "产品售后保修政策（2026版）",
+    "document_type": "after_sales",
+    "department": "support",
+    "version": "2026",
+    "effective_date": "2026-01-01",
+    "product": "all",
+    "region": "all",
+    "allowed_roles": ["sales", "support", "management", "admin"]
+  },
+  {
+    "document_id": "x200-faq-2026",
+    "source_path": "faq/x200_faq_2026.md",
+    "document_name": "X200 常见问题",
+    "document_type": "faq",
+    "department": "support",
+    "version": "2026",
+    "effective_date": "2026-01-01",
+    "product": "X200",
+    "region": "all",
+    "allowed_roles": ["sales", "support", "management", "admin"]
+  },
+  {
+    "document_id": "sales-policy-south-china-2026-q1",
+    "source_path": "sales_policy/south_china_2026_q1.md",
+    "document_name": "华南区域销售政策（2026 Q1）",
+    "document_type": "sales_policy",
+    "department": "sales",
+    "version": "2026-Q1",
+    "effective_date": "2026-01-01",
+    "product": "X200",
+    "region": "south_china",
+    "allowed_roles": ["sales", "management", "admin"]
+  },
+  {
+    "document_id": "sales-policy-south-china-2026-q2",
+    "source_path": "sales_policy/south_china_2026_q2.md",
+    "document_name": "华南区域销售政策（2026 Q2）",
+    "document_type": "sales_policy",
+    "department": "sales",
+    "version": "2026-Q2",
+    "effective_date": "2026-04-01",
+    "product": "X200",
+    "region": "south_china",
+    "allowed_roles": ["sales", "management", "admin"]
+  },
+  {
+    "document_id": "repair-ticket-sop-2026",
+    "source_path": "operation_sop/repair_ticket_sop_2026.md",
+    "document_name": "售后返修工单处理 SOP",
+    "document_type": "operation_sop",
+    "department": "support",
+    "version": "2026",
+    "effective_date": "2026-01-01",
+    "product": "all",
+    "region": "all",
+    "allowed_roles": ["support", "management", "admin"]
+  }
+]
