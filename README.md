@@ -30,11 +30,20 @@ The platform is designed around:
 
 ## Current Status
 
-Stage 0 architecture and planning are complete.
+Completed:
 
-Current implementation milestone:
+- M0 — Repository & Infrastructure Bootstrap
+- M1 — Agent Runtime MVP
 
-**M0 — Repository & Infrastructure Bootstrap**
+Current runtime supports:
+
+- FastAPI `/chat`
+- LangGraph stateful workflow execution
+- OpenAI-compatible Model Gateway
+- native function calling
+- enterprise product lookup tool
+- PostgreSQL-backed tool execution
+- deterministic workflow tracing
 
 ## Architecture
 
