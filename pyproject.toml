@@ -12,6 +12,9 @@ dependencies = [
     "openai>=3.10.0",
     "sqlalchemy>=2.0.52",
     "psycopg[binary]>=3.3.5",
+    "torch>=2.14.0",
+    "sentence-transformers==5.3.0",
+    "transformers>=5.17.0",
 ]
 
 [dependency-groups]
@@ -23,3 +26,11 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

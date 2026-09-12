@@ -16,6 +16,12 @@ class Settings(BaseSettings):
     model_base_url: str | None = None
     model_api_key: str | None = None
     model_name: str | None = None
+    
+    embedding_model: str = "BAAI/bge-m3"
+    embedding_max_tokens: int = 700
+    embedding_overlap_tokens: int = 100
+    embedding_batch_size: int = 1
+    embedding_max_sequence_length: int = 1024
 
     model_config = SettingsConfigDict(
         env_file=".env",
