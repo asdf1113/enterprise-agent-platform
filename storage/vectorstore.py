@@ -37,6 +37,7 @@ class KnowledgeVectorStore:
             INSERT INTO knowledge_chunks (
                 chunk_id,
                 document_id,
+                document_group,
                 document_name,
                 document_type,
                 department,
@@ -56,6 +57,7 @@ class KnowledgeVectorStore:
             VALUES (
                 :chunk_id,
                 :document_id,
+                :document_group,
                 :document_name,
                 :document_type,
                 :department,
@@ -86,6 +88,7 @@ class KnowledgeVectorStore:
                 {
                     "chunk_id": chunk.chunk_id,
                     "document_id": chunk.document_id,
+                    "document_group": chunk.document_group,
                     "document_name": (
                         chunk.document_name
                     ),

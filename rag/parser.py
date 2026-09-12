@@ -12,6 +12,7 @@ HEADING_PATTERN = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 @dataclass(frozen=True)
 class DocumentMetadata:
     document_id: str
+    document_group: str
     document_name: str
     document_type: str
     department: str
@@ -47,6 +48,7 @@ def load_manifest(
     return [
         DocumentMetadata(
             document_id=item["document_id"],
+            document_group=item["document_group"],
             document_name=item["document_name"],
             document_type=item["document_type"],
             department=item["department"],

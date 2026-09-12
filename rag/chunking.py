@@ -9,6 +9,7 @@ class KnowledgeChunk:
     chunk_id: str
 
     document_id: str
+    document_group: str
     document_name: str
     document_type: str
     department: str
@@ -103,6 +104,9 @@ def chunk_document(
                     ),
                     document_id=(
                         document.metadata.document_id
+                    ),
+                    document_group=(
+                        document.metadata.document_group
                     ),
                     document_name=(
                         document.metadata.document_name

@@ -9,7 +9,13 @@
     "effective_date": "2026-01-01",
     "product": "X200",
     "region": "all",
-    "allowed_roles": ["sales", "support", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "support",
+      "management",
+      "admin"
+    ],
+    "document_group": "product-manual-x200"
   },
   {
     "document_id": "warranty-policy-2025",
@@ -21,7 +27,13 @@
     "effective_date": "2025-01-01",
     "product": "all",
     "region": "all",
-    "allowed_roles": ["sales", "support", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "support",
+      "management",
+      "admin"
+    ],
+    "document_group": "warranty-policy"
   },
   {
     "document_id": "warranty-policy-2026",
@@ -33,7 +45,13 @@
     "effective_date": "2026-01-01",
     "product": "all",
     "region": "all",
-    "allowed_roles": ["sales", "support", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "support",
+      "management",
+      "admin"
+    ],
+    "document_group": "warranty-policy"
   },
   {
     "document_id": "x200-faq-2026",
@@ -45,7 +63,13 @@
     "effective_date": "2026-01-01",
     "product": "X200",
     "region": "all",
-    "allowed_roles": ["sales", "support", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "support",
+      "management",
+      "admin"
+    ],
+    "document_group": "x200-faq"
   },
   {
     "document_id": "sales-policy-south-china-2026-q1",
@@ -57,7 +81,12 @@
     "effective_date": "2026-01-01",
     "product": "X200",
     "region": "south_china",
-    "allowed_roles": ["sales", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "management",
+      "admin"
+    ],
+    "document_group": "south-china-sales-policy"
   },
   {
     "document_id": "sales-policy-south-china-2026-q2",
@@ -69,7 +98,12 @@
     "effective_date": "2026-04-01",
     "product": "X200",
     "region": "south_china",
-    "allowed_roles": ["sales", "management", "admin"]
+    "allowed_roles": [
+      "sales",
+      "management",
+      "admin"
+    ],
+    "document_group": "south-china-sales-policy"
   },
   {
     "document_id": "repair-ticket-sop-2026",
@@ -81,6 +115,11 @@
     "effective_date": "2026-01-01",
     "product": "all",
     "region": "all",
-    "allowed_roles": ["support", "management", "admin"]
+    "allowed_roles": [
+      "support",
+      "management",
+      "admin"
+    ],
+    "document_group": "repair-ticket-sop"
   }
 ]

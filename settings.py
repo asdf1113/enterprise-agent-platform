@@ -22,6 +22,13 @@ class Settings(BaseSettings):
     embedding_overlap_tokens: int = 100
     embedding_batch_size: int = 1
     embedding_max_sequence_length: int = 1024
+    
+    retrieval_candidate_k: int = 20
+    retrieval_top_k: int = 5
+
+    reranker_model: str = "BAAI/bge-reranker-base"
+    reranker_batch_size: int = 2
+    reranker_max_length: int = 512
 
     model_config = SettingsConfigDict(
         env_file=".env",

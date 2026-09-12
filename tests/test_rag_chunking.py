@@ -34,6 +34,7 @@ def test_chunking_respects_section_boundaries() -> None:
     document = ParsedDocument(
         metadata=DocumentMetadata(
             document_id="doc-1",
+            document_group="test-document",
             document_name="测试文档",
             document_type="test",
             department="test",
