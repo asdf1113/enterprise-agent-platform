@@ -24,4 +24,5 @@ def request_parser(state: AgentState) -> dict:
                 "event": "request_parsed",
             }
         ],
+        "citations": [],
     }

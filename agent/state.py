@@ -15,3 +15,5 @@ class AgentState(TypedDict, total=False):
     final_answer: str | None
 
     trace: list[dict[str, Any]]
+    
+    citations: list[dict]

@@ -1,12 +1,70 @@
+import json
 from decimal import Decimal
 from typing import Any
 
 import pytest
+from datetime import date
 
+from rag.retriever import RetrievedChunk
 from agent.context import AgentContext
 from agent.graph import agent_graph
 from agent.router import MAX_TOOL_ROUNDS, route_after_model
 
+
+class FakeKnowledgeRetriever:
+    def __init__(self) -> None:
+        self.last_call = None
+
+    def search(
+        self,
+        query: str,
+        *,
+        role: str,
+        as_of_date: date,
+        product=None,
+        region=None,
+    ) -> list[RetrievedChunk]:
+        self.last_call = {
+            "query": query,
+            "role": role,
+            "as_of_date": as_of_date,
+        }
+
+        return [
+            RetrievedChunk(
+                chunk_id=(
+                    "warranty-policy-2026:0000"
+                ),
+                document_id=(
+                    "warranty-policy-2026"
+                ),
+                document_group=(
+                    "warranty-policy"
+                ),
+                document_name=(
+                    "产品售后保修政策（2026版）"
+                ),
+                document_type="after_sales",
+                version="2026",
+                effective_date=date(
+                    2026,
+                    1,
+                    1,
+                ),
+                product="all",
+                region="all",
+                source_path=(
+                    "after_sales/"
+                    "warranty_policy_2026.md"
+                ),
+                section_title="标准保修期限",
+                content=(
+                    "X200 标准保修期限为 24 个月。"
+                ),
+                dense_score=0.76,
+                rerank_score=0.99,
+            )
+        ]
 
 class FakeOutputItem:
     def __init__(
@@ -217,3 +275,116 @@ def test_router_rejects_excessive_tool_rounds() -> None:
                 "tool_rounds": MAX_TOOL_ROUNDS,
             }
         )
+
+def test_agent_graph_executes_knowledge_search() -> None:
+    fake_retriever = FakeKnowledgeRetriever()
+
+    gateway = FakeGateway(
+        [
+            FakeResponse(
+                response_id="resp-knowledge-1",
+                output=[
+                    FakeOutputItem(
+                        "reasoning",
+                    ),
+                    FakeOutputItem(
+                        "function_call",
+                        call_id="call-knowledge-1",
+                        name="knowledge_search",
+                        arguments=json.dumps(
+                            {
+                                "query": (
+                                    "X200 的标准保修期多久？"
+                                ),
+                                "as_of_date": None,
+                            },
+                            ensure_ascii=False,
+                        ),
+                    ),
+                ],
+                output_text="",
+            ),
+            FakeResponse(
+                response_id="resp-knowledge-2",
+                output=[
+                    FakeOutputItem(
+                        "reasoning",
+                    ),
+                    FakeOutputItem(
+                        "message",
+                    ),
+                ],
+                output_text=(
+                    "X200 的标准保修期为 "
+                    "24 个月。[K1]"
+                ),
+            ),
+        ]
+    )
+
+    context = AgentContext(
+        gateway=gateway,
+        database=FakeDatabase(),
+        knowledge_retriever_factory=(
+            lambda: fake_retriever
+        ),
+        user_role="support",
+        current_date=date(
+            2026,
+            9,
+            12,
+        ),
+    )
+
+    result = agent_graph.invoke(
+        {
+            "request_id": "req-knowledge-1",
+            "user_message": (
+                "X200 的标准保修期多久？"
+            ),
+        },
+        context=context,
+    )
+
+    assert result["tool_rounds"] == 1
+
+    assert fake_retriever.last_call == {
+        "query": "X200 的标准保修期多久？",
+        "role": "support",
+        "as_of_date": date(2026, 9, 12),
+    }
+
+    assert (
+        result["final_answer"]
+        == "X200 的标准保修期为 24 个月。[K1]"
+    )
+
+    assert (
+        result["citations"][0]["citation_id"]
+        == "K1"
+    )
+
+    assert (
+        result["citations"][0]["document_id"]
+        == "warranty-policy-2026"
+    )
+
+    assert [
+        item["node"]
+        for item in result["trace"]
+    ] == [
+        "request_parser",
+        "model",
+        "tool_executor",
+        "model",
+    ]
+
+    second_model_input = gateway.calls[1]["input"]
+
+    assert any(
+        item.get("type")
+        == "function_call_output"
+        and item.get("call_id")
+        == "call-knowledge-1"
+        for item in second_model_input
+    )
