@@ -18,7 +18,8 @@ services:
       - ./migrations/001_products.sql:/docker-entrypoint-initdb.d/002-products.sql:ro
       - ./migrations/002_knowledge_chunks.sql:/docker-entrypoint-initdb.d/003-knowledge-chunks.sql:ro
       - ./migrations/003_knowledge_retrieval.sql:/docker-entrypoint-initdb.d/004-knowledge-retrieval.sql:ro
-    
+      - ./migrations/004_business_data.sql:/docker-entrypoint-initdb.d/005-business-data.sql:ro
+
     healthcheck:
       test:
         [
