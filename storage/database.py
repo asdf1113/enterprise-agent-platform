@@ -39,3 +39,34 @@ class Database:
             return None
 
         return dict(row)
+
+    def execute_readonly_query(
+        self,
+        sql: str,
+        *,
+        timeout_ms: int = 3000,
+    ) -> list[dict[str, Any]]:
+        if timeout_ms <= 0:
+            raise ValueError(
+                "timeout_ms must be positive"
+            )
+
+        with self.engine.connect() as connection:
+            with connection.begin():
+                connection.exec_driver_sql(
+                    "SET TRANSACTION READ ONLY"
+                )
+
+                connection.exec_driver_sql(
+                    "SET LOCAL statement_timeout "
+                    f"= {timeout_ms}"
+                )
+
+                rows = connection.execute(
+                    text(sql)
+                ).mappings().all()
+
+        return [
+            dict(row)
+            for row in rows
+        ]

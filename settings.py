@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     reranker_model: str = "BAAI/bge-reranker-base"
     reranker_batch_size: int = 2
     reranker_max_length: int = 512
+    
+    business_query_max_rows: int = 100
+    business_query_timeout_ms: int = 3000
 
     model_config = SettingsConfigDict(
         env_file=".env",
